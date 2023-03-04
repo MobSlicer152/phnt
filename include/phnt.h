@@ -82,7 +82,9 @@ extern "C" {
 #include <ntbcd.h>
 #include <ntmmapi.h>
 #include <ntobapi.h>
+#ifndef PURPL_WIN32
 #include <ntpsapi.h>
+#endif
 
 #if (PHNT_MODE != PHNT_MODE_KERNEL)
 #include <cfg.h>
