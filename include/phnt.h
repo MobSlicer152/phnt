@@ -82,7 +82,7 @@ extern "C" {
 #include <ntbcd.h>
 #include <ntmmapi.h>
 #include <ntobapi.h>
-#ifndef PURPL_WIN32
+#ifndef PHNT_NO_PSAPI
 #include <ntpsapi.h>
 #endif
 
