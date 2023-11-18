@@ -108,7 +108,7 @@ extern "C" {
 
 #include <ntwow64.h>
 
-#include <ntlsa.h>
+//#include <ntlsa.h>
 #include <ntsam.h>
 
 #include <ntmisc.h>
