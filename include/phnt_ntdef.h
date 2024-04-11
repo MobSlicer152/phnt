@@ -53,6 +53,8 @@ typedef CLONG *PCLONG;
 
 typedef PCSTR PCSZ;
 
+typedef PVOID* PPVOID;
+
 // Specific
 
 typedef UCHAR KIRQL, *PKIRQL;
@@ -72,6 +74,9 @@ typedef struct _LARGE_INTEGER_128
 #define NT_INFORMATION(Status) ((((ULONG)(Status)) >> 30) == 1)
 #define NT_WARNING(Status) ((((ULONG)(Status)) >> 30) == 2)
 #define NT_ERROR(Status) ((((ULONG)(Status)) >> 30) == 3)
+
+#define NT_CUSTOMER_SHIFT 29
+#define NT_CUSTOMER(Status) ((((ULONG)(Status)) >> NT_CUSTOMER_SHIFT) & 1)
 
 #define NT_FACILITY_MASK 0xfff
 #define NT_FACILITY_SHIFT 16
@@ -205,6 +210,7 @@ typedef STRING64 ANSI_STRING64, *PANSI_STRING64;
 #define OBJ_PROTECT_CLOSE                   0x00000001L
 #define OBJ_INHERIT                         0x00000002L
 #define OBJ_AUDIT_OBJECT_CLOSE              0x00000004L
+#define OBJ_NO_RIGHTS_UPGRADE               0x00000008L
 #define OBJ_PERMANENT                       0x00000010L
 #define OBJ_EXCLUSIVE                       0x00000020L
 #define OBJ_CASE_INSENSITIVE                0x00000040L
@@ -331,10 +337,6 @@ typedef struct _KSYSTEM_TIME
 
 #include <poppack.h>
 
-#ifndef IMAGE_FILE_MACHINE_CHPE_X86
-#define IMAGE_FILE_MACHINE_CHPE_X86 0x3A64
-#endif
-
 #ifndef AFFINITY_MASK
 #define AFFINITY_MASK(n) ((KAFFINITY)1 << (n))
 #endif
@@ -352,11 +354,12 @@ typedef struct _KSYSTEM_TIME
 #define ClearFlag(_F, _SF) ((_F) &= ~(_SF))
 #endif
 
-#ifndef STATIC_ASSERT
-#define STATIC_ASSERT(expression) \
-    static_assert(expression, #expression)
 #endif
 
+#if defined(_WIN64)
+#define POINTER_ALIGNMENT DECLSPEC_ALIGN(8)
+#else
+#define POINTER_ALIGNMENT
 #endif
 
 #endif

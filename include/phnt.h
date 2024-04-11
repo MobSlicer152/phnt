@@ -53,6 +53,7 @@
 #define PHNT_WIN10_22H2 113
 #define PHNT_WIN11 114
 #define PHNT_WIN11_22H2 115
+#define PHNT_WIN11_23H2 116
 
 #ifndef PHNT_MODE
 #define PHNT_MODE PHNT_MODE_USER
@@ -73,18 +74,16 @@ extern "C" {
 #if (PHNT_MODE != PHNT_MODE_KERNEL)
 #include <phnt_ntdef.h>
 #include <ntnls.h>
-#include <ntkeapi.h>
 #endif
 
+#include <ntkeapi.h>
 #include <ntldr.h>
 #include <ntexapi.h>
 
 #include <ntbcd.h>
 #include <ntmmapi.h>
 #include <ntobapi.h>
-#ifndef PHNT_NO_PSAPI
 #include <ntpsapi.h>
-#endif
 
 #if (PHNT_MODE != PHNT_MODE_KERNEL)
 #include <cfg.h>
@@ -108,7 +107,7 @@ extern "C" {
 
 #include <ntwow64.h>
 
-//#include <ntlsa.h>
+#include <ntlsa.h>
 #include <ntsam.h>
 
 #include <ntmisc.h>
